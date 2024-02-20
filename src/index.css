@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+
+body{
+    margin: 0;
+    font-family: "Neucha", cursive;
+}
+button{
+    background-color: none;
+    border: none;
+    cursor: pointer;
+}

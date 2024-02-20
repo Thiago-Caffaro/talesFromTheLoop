@@ -1,0 +1,67 @@
+#card{
+    max-width: 650px;
+    max-height: 400px;
+    overflow-y: scroll;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    padding: 25px;
+    flex-direction: row;
+    border-radius: 10px;
+    border: solid black 1px;
+    background-color: rgb(255, 232, 157);
+}
+#card::-webkit-scrollbar-track {
+    background: #e60000; /* Set the background color of the track */
+}
+#images, #text{
+    margin: 10px;
+}
+#text{
+    font-size: 20px;
+}
+#images{
+    max-height: 400px;
+    display: grid;
+    grid-template-columns:auto auto;
+    gap: 5px;
+}
+.blind{
+    filter: blur(1px);
+    opacity: 0.9;
+    cursor: zoom-in;
+}
+.imageCard{
+    height: 200px;
+    transition: 1s;
+}
+.zoomed{
+    position: relative;
+    transform: translateX(50%);
+
+    cursor: zoom-out;
+    scale: 2;
+    filter: blur(0);
+    opacity: 1;
+    z-index: 99;
+}
+h1{
+    text-align: center;
+}
+button{
+    height: 30px;
+    width: 30px;
+
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+}
+.showing{
+    display: flex;
+}
+.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease; /* Add transition for opacity */
+}
