@@ -26,7 +26,7 @@ function Card({setIsVisible}){
                     <img
                         key={index}
                         className={isZoomed[index] ? 'imageCard zoomed' : 'imageCard blind'}
-                        src={`/jean${id}.png`}
+                        src={`/talesFromTheLoop/jean${id}.png`}
                         onClick={() => toggleZoom(index)}
                     />
                 ))}
