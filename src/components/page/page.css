@@ -1,12 +1,4 @@
-.page {
-    position: absolute;
-    background-image: url("/page.png");
-    width: 310px;
-    height: 420px;
-    margin-top: 20px;
-    left: 5px;
 
-}
 .text-area{
     position: absolute;
     top: 0;
@@ -23,35 +15,54 @@
     height: 100%;
     border-radius: 15px 0 0 15px;
 }
-
-.front-page{
+.page-container{
     position: absolute;
-    background-image: url("/talesFromTheLoop/page.png");
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
+    width: 95%;
+    height: 95%;
+    margin-top: 10px;
     box-sizing: border-box;
-
     transform-origin: center left;
     transform-style: preserve-3d;
     transition-duration: 1.5s;
     perspective: 1000px;
 }
-
-.back-page {
-    transform: rotateY(180deg);
-    right: -16px;
-    z-index: 99;
-}
-.next{
-	right: 5px;
-}
-.next, .prev {
+.front-page, .back-page {
     position: absolute;
+    background-image: url("/page.png");
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    backface-visibility: hidden; /* Evita o flicker durante a animação */
+}
+.back-page {
+    transform: rotateY(-180deg);
+    /* Remova z-index: -1; para garantir que a parte traseira da página seja visível */
+}
+
+.page-container.flipped .back-page {
+    z-index: 1; /* Ajusta o z-index da parte traseira quando a página está virada */
+}
+
+.front-page > .text-area > .next{
+    position: absolute;
+	right: 5px;
     bottom: 1em;
+    margin: 10px;
     cursor: pointer;
 }
-
+.back-page > .text-area > .next{
+    transform: rotateY(-180deg);
+    position: absolute;
+	left: 5px;
+    bottom: 1em;
+    margin: 10px;
+    cursor: pointer;
+}
+#showCardsText{
+    background-color: none;
+    width: 100%;
+    cursor: pointer;
+}
 .flipped{
     transform: rotateY(-180deg);
 }

@@ -6,21 +6,17 @@ import { useEffect, useRef, useState } from 'react';
 function Book() {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false); // Estado para controlar se o livro está sendo fechado
 
-  
-  const bookRef = useRef(null)
+  const bookRef = useRef(null);
   const bookCoverRef = useRef(null);
   const closeBookRef = useRef(null);
   const cardRef = useRef(null);
 
-  
-
-  // Function to toggle isOpen state
   const flip = () => {
     setIsOpen(prevOpen => !prevOpen);
   };
 
-  // Push the book to the left/right
   const handleFlipAnimationComplete = () => {
     if (isOpen) {
       bookRef.current.style.transform = 'translateX(200px)';
@@ -29,18 +25,15 @@ function Book() {
     }
   };
 
-  // Effect hook to add event listeners and clean them up
   useEffect(() => {
     const bookCover = bookCoverRef.current;
     const closeBook = closeBookRef.current;
-    const book = bookRef.current;
 
-    // Function to handle flip event
     const handleFlip = () => {
       flip();
     };
+    
 
-    // Add event listeners
     if (bookCover) {
       bookCover.addEventListener('click', handleFlip);
     }
@@ -49,7 +42,6 @@ function Book() {
       closeBook.addEventListener('click', handleFlip);
     }
 
-    // Clean up event listeners
     return () => {
       if (bookCover) {
         bookCover.removeEventListener('click', handleFlip);
@@ -58,55 +50,60 @@ function Book() {
         closeBook.removeEventListener('click', handleFlip);
       }
     };
-  }, []); // Empty dependency array means this effect runs only once after the initial render
+  }, []);
 
-  // Effect hook to update the UI based on isOpen state
   useEffect(() => {
     const bookCover = bookCoverRef.current;
 
     if (isOpen) {
       if (bookCover) {
         bookCover.style.transform = 'rotateY(-180deg)';
+        setTimeout(() => {
+          bookCover.style.zIndex = 1;
+        }, 500);
         
       }
       closeBookRef.current.style.display = 'inline-block';
     } else {
       if (bookCover) {
-        bookCover.style.transform = 'rotateY(0deg)';
+          bookCover.style.zIndex = 99;
+          bookCover.style.transform = 'rotateY(0deg)';
         
       }
       closeBookRef.current.style.display = 'none';
     }
   }, [isOpen]);
-  
-  // UseEffect to wait the book animation ends
+
   useEffect(() => {
     handleFlipAnimationComplete();
   }, [isOpen]);
 
-  const moreContent = () => {
-    setIsVisible(true);
+  // Função para fechar o livro
+  const closeBook = () => {
+    setIsClosing(true); // Define que o livro está sendo fechado
+    // Remove a classe 'flipped' de todas as páginas
+    const pages = document.querySelectorAll('.page-container');
+    pages.forEach(page => {
+      page.classList.remove('flipped');
+    });
+    setTimeout(() => {
+      setIsOpen(false); // Fecha o livro após a remoção da classe 'flipped'
+      setIsClosing(false); // Define que o processo de fechamento do livro foi concluído
+    }, 2000); // Tempo suficiente para a animação de virar a página antes de fechar o livro
   };
 
   return (
     <>
-      {/* Close button */}
-      <h1 id="closeBook" ref={closeBookRef}>
+      <h1 id="closeBook" ref={closeBookRef} onClick={closeBook}>
         Fechar livro
       </h1>
-      <button onClick={moreContent}>a</button>
-      {/* Book */}
       <div ref={bookRef} className="book">
         <div className="cover" ref={bookCoverRef}>
           <div className="inside"></div>
         </div>
-        {/* Pages */}
-        <Page/>
-
-        {/* Back cover */}
+        <Page setIsVisible={setIsVisible} isVisible={isVisible} isClosing={isClosing} /> {/* Passa o estado isClosing para Page */}
         <div className="back-cover"></div>
       </div>
-      {/* Card */}
       <div ref={cardRef} className={isVisible ? 'showing' : 'hidden'}>
         <Card setIsVisible={setIsVisible} />
       </div>

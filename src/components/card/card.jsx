@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 function Card({setIsVisible}){
     // Creation of the array to track the state of zoomed cards
-    const totalImages = 3; // Total number of images
+    const totalImages = 2; // Total number of images
     const imagesArray = Array.from({ length: totalImages }, (_, index) => index + 1);
 
     const [isZoomed, setIsZoomed] = useState(Array(totalImages).fill(false));
@@ -26,13 +26,13 @@ function Card({setIsVisible}){
                     <img
                         key={index}
                         className={isZoomed[index] ? 'imageCard zoomed' : 'imageCard blind'}
-                        src={`/talesFromTheLoop/jean${id}.png`}
+                        src={`/talesFromTheLoop/cards/act1/card${id}.png`}
                         onClick={() => toggleZoom(index)}
                     />
                 ))}
             </div>
             <div id='text'>
-            Porém, ao Jean sair de sala, acaba revelando por meio de rabiscos em jornais, sua imensa confusão sobre os pássaros que foram estranhamentr encobertados pela mídia, e uma pequena floresta localizada perto de um dos túneis de trabalho do loop.
+            ...acaba revelando por meio de rabiscos em jornais, sua imensa confusão sobre os pássaros que foram estranhamentr encobertados pela mídia, e uma pequena floresta localizada perto de um dos túneis de trabalho do loop.
 Após as aulas, todos decidem marcar um encontro com Jean na casa do Jimmy, para revelar tudo que viram ultimamente, como os pássaros e as fitas. 
 Quando ela entra mais a fundo no assunto de suas teorias, ela sita um coisa que nem ela sabe explicar aconteceu quando explorava sozinha, viu um servo morto, porém, com sua metade completamente fresca, como tivesse sido cortado vivo, e outra metade com apenas ossos, já quebradiços sem nenhum sinal de carne.
 
