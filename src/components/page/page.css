@@ -8,6 +8,7 @@
     padding: 20px;
     box-sizing: border-box;
     backface-visibility: hidden;
+    font-size: 1.3em;
 }
 
 .page img {
@@ -18,7 +19,7 @@
 .page-container{
     position: absolute;
     width: 95%;
-    height: 95%;
+    height: 98%;
     margin-top: 10px;
     box-sizing: border-box;
     transform-origin: center left;
@@ -29,6 +30,7 @@
 .front-page, .back-page {
     position: absolute;
     background-image: url("/page.png");
+    background-size: cover;
     width: 100%;
     height: 100%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);

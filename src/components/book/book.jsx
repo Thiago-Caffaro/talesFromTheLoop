@@ -7,6 +7,7 @@ function Book() {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false); // Estado para controlar se o livro está sendo fechado
+  const [actualCardKey, setActualCardKey] = useState("pag0"); //Estado da pageKey da aba de Cards
 
   const bookRef = useRef(null);
   const bookCoverRef = useRef(null);
@@ -24,7 +25,7 @@ function Book() {
       bookRef.current.style.transform = 'translateX(0px)';
     }
   };
-
+  // Festa dos useEffects abaixo: 
   useEffect(() => {
     const bookCover = bookCoverRef.current;
     const closeBook = closeBookRef.current;
@@ -78,6 +79,9 @@ function Book() {
     handleFlipAnimationComplete();
   }, [isOpen]);
 
+  useEffect(() => {
+    console.log(actualCardKey);
+  }, [actualCardKey])
   // Função para fechar o livro
   const closeBook = () => {
     setIsClosing(true); // Define que o livro está sendo fechado
@@ -92,6 +96,8 @@ function Book() {
     }, 2000); // Tempo suficiente para a animação de virar a página antes de fechar o livro
   };
 
+  // Lista do conteudo dos cards
+  
   return (
     <>
       <h1 id="closeBook" ref={closeBookRef} onClick={closeBook}>
@@ -101,11 +107,22 @@ function Book() {
         <div className="cover" ref={bookCoverRef}>
           <div className="inside"></div>
         </div>
-        <Page setIsVisible={setIsVisible} isVisible={isVisible} isClosing={isClosing} /> {/* Passa o estado isClosing para Page */}
+        <Page 
+          setIsVisible={setIsVisible}
+          setActualCardKey={setActualCardKey}
+          isVisible={isVisible} 
+          isClosing={isClosing}
+          /* 
+            Passa a função setIsVisible e setActualCardKey
+            e os estados isVisible e isClosing para Page
+          */
+          
+        /> 
+        
         <div className="back-cover"></div>
       </div>
       <div ref={cardRef} className={isVisible ? 'showing' : 'hidden'}>
-        <Card setIsVisible={setIsVisible} />
+        <Card setIsVisible={setIsVisible} isVisible={isVisible} actualCardKey={actualCardKey}  />
       </div>
     </>
   );

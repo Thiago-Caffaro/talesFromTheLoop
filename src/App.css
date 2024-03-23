@@ -2,7 +2,10 @@ html, body {
   height: 100%;
 }
 body {
-  background-color: #2e3537;
+  background-image: url('/desk.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,4 +15,17 @@ body {
 a {
   text-decoration: underline;
   color: black;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2E3537;
+  border-radius: 20px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #505d61; 
+  border-radius: 20px;
 }

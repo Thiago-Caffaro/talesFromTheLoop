@@ -1,7 +1,8 @@
 import './page.css';
+import pagesContentList from '../../assets/pagesContent';
 import { useEffect, useRef, useState } from 'react';
 
-function Page({ setIsVisible, isClosing, isVisible}) {
+function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
     const [pageStates, setPageStates] = useState({});
     const [pageIndexMap, setPageIndexMap] = useState({});
     const [nextAvailableIndex, setNextAvailableIndex] = useState(1);
@@ -16,22 +17,6 @@ function Page({ setIsVisible, isClosing, isVisible}) {
         setInitialIndexMap(initialIndexMap);
     }, []);
 
-    const pagesContentList = {
-        pag2: {
-            frontTitle: "Ato 2 - ???",
-            frontText: "???",
-            backTitle: "???",
-            backText: "???",
-            index: 1
-        },
-        pag1: {
-            frontTitle: "Ato 1 - O vazamento",
-            frontText: "`Após um pequeno recesso escolar causado por uma estranha invasão descontrolada de pássaros, as aulas voltaram normalmente, porém, com alunos novos! A maior parte das turmas receberam alunos novos, incluindo a da Lori, onde ela acaba conversando com Jean, uma aluna estranha, e definitivamente excluída pelo seu jeito. Lori indica ela a seu amigo Henry, por acharem parecidos, e então, no intervalo, ambos acabam se conhecendo e conversando sobre diversas coisas, parece que realmente eles tem muita coisa em comum!`",
-            backTitle: "Ato 1 - O vazamento",
-            backText: "Porém, ao Jean sair de sala, acaba revelando por meio de rabiscos em jornais...",
-            index: 2
-        }
-    }
 
     const flipPage = (pageKey) => {
         setPageStates(prevState => ({
@@ -55,8 +40,12 @@ function Page({ setIsVisible, isClosing, isVisible}) {
         }
     }, [isClosing, initialIndexMap]);
 
-    const handleSetIsVissible = () => {
-        setIsVisible(true)
+    const handleSetIsVisible = (actualCardKey) => {
+        /* 
+            Aqui, passo a key da página para o componente book, e transformo em um index, sendo ele passado para a função abaixo 
+        */
+        setActualCardKey(actualCardKey);
+        setIsVisible(true);
     }
     return (
         <>
@@ -80,7 +69,14 @@ function Page({ setIsVisible, isClosing, isVisible}) {
                             <div className="back-page">
                                 <div className="text-area">
                                     <h2>{pagesContentList[pageKey].backTitle}</h2>
-                                    <p id='showCardsText' onClick={handleSetIsVissible} >{pagesContentList[pageKey].backText}</p>
+                                    <p id='showCardsText' 
+                                        onClick={() => handleSetIsVisible(pageKey)} 
+                                        /*
+                                            Passa o index do elemento para o handleSetIsVisible
+                                        */
+                                    >
+                                        {pagesContentList[pageKey].backText}
+                                    </p>
                                     
                                     <div className='next' onClick={() => flipPage(pageKey)}>
                                         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm-3 5.753l6.44 5.247-6.44 5.263.678.737 7.322-6-7.335-6-.665.753z"/></svg>

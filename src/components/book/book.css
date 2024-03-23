@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 
 .book {
-    width: 340px;
-    height: 450px;
+    width: 440px;
+    height: 550px;
     margin: auto;
     position: relative;
     transition: transform 1s;
