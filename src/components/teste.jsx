@@ -23,7 +23,7 @@ function Teste() {
             index: 1
         }
     } 
-    fetch('http://alb-api-webserver-2080380489.us-east-2.elb.amazonaws.com/add', {
+    fetch('https://api.caffaro.cloud/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
