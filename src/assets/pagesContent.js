@@ -41,4 +41,5 @@ const pagesContentList = {
         index: 2
     }
 }
+
 export default pagesContentList;
