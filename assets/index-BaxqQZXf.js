@@ -65,4 +65,4 @@ Error generating stack: `+o.message+`
                 mesma linha...
                 `,card:{act:2,mainText:`
                     Ao entrarem nela, encontram armas
-                `},index:1}});return fetch("https://api.caffaro.cloud/add",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(n)}).then(t=>t.json()).then(t=>{console.log("Sucesso:",n)}).catch(t=>{console.error("Erro:",t)}),P.jsx("div",{})}function Id(){return P.jsxs(P.Fragment,{children:[P.jsx(jd,{}),P.jsx(Od,{})]})}Yl.createRoot(document.getElementById("root")).render(P.jsx(Id,{}));
+                `},index:1}});return fetch("https://api.caffaro.cloud/add",{method:"POST",headers:{"Content-Type":"application/json"},body:n}).then(t=>t.json()).then(t=>{console.log("Sucesso:",t)}).catch(t=>{console.error("Erro:",t)}),P.jsx("div",{})}function Id(){return P.jsxs(P.Fragment,{children:[P.jsx(jd,{}),P.jsx(Od,{})]})}Yl.createRoot(document.getElementById("root")).render(P.jsx(Id,{}));
