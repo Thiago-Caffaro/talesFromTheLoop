@@ -23,16 +23,17 @@ function Teste() {
             index: 1
         }
     } 
+    const pagesContentJson = JSON.stringify(pagesContentList1);
     fetch('https://api.caffaro.cloud/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify(pagesContentList1),
+            body: JSON.stringify(pagesContentJson),
         })
         .then(response => response.json())
         .then(pagesContentList1 => {
-            console.log('Sucesso:', pagesContentList1);
+            console.log('Sucesso:', pagesContentJson);
         })
         .catch((error) => {
             console.error('Erro:', error);
