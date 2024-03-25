@@ -6,11 +6,11 @@ import Teste from './components/teste.jsx'
 import './index.css'
 const router = createBrowserRouter([
     {
-        path: 'talesfromtheloop',
+        path: '/talesfromtheloop',
         element: <App />
     },
     {
-        path: 'talesfromtheloop/teste',
+        path: '/talesfromtheloop/teste',
         element: <Teste></Teste>
     }
 
