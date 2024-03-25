@@ -1,3 +1,4 @@
+import "./estilo.css"
 function Teste() {
     const pagesContentList1 = {
         pag2: {
@@ -41,7 +42,11 @@ function Teste() {
     
     return (
         <div>
-
+            <form id="formulario" action="" method="post">
+                <label htmlFor="pag">Página</label>
+                <input id="pag" name="pag" type="text" />
+                <input type="submit" value="Mandar" />
+            </form>
         </div>
     )
 }
