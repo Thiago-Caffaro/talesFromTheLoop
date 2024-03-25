@@ -43,8 +43,34 @@ function Teste() {
     return (
         <div>
             <form id="formulario" action="" method="post">
+                <h1>Book:</h1>
                 <label htmlFor="pag">Página</label>
+                <br />
+                <textarea id="pag" name="pag" type="text" />
+                <br />
+                <label htmlFor="pag">FrontTitle</label>
                 <input id="pag" name="pag" type="text" />
+                <br />
+                <label htmlFor="pag">FrontText</label>
+                <input id="pag" name="pag" type="text" />
+                <br />
+                <label htmlFor="pag">BackTitle</label>
+                <input id="pag" name="pag" type="text" />
+                <br />
+                <label htmlFor="pag">BackText</label>
+                <input id="pag" name="pag" type="text" />
+                <br />
+                <label htmlFor="pag">Index</label>
+                <input id="pag" name="pag" type="text" />
+                <br />
+                <h1>Cards:</h1>
+                <label htmlFor="pag">act</label>
+                <input id="pag" name="pag" type="text" />
+                <br />
+                <label htmlFor="pag">MainText</label>
+                <input id="pag" name="pag" type="text" />
+                <br />
+
                 <input type="submit" value="Mandar" />
             </form>
         </div>

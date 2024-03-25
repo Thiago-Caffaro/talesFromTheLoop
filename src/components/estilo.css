@@ -6,3 +6,8 @@ form{
 input{
     display: block;
 }
+textarea{
+    max-width: 400px;
+    min-width: 200px;
+    max-height: 1000px;
+}
