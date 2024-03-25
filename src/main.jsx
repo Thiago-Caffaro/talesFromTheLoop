@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, HashRouter } from 'react-router-dom'
 import App from './App.jsx'
 import Teste from './components/teste.jsx'
 import './index.css'
@@ -16,5 +16,5 @@ const router = createBrowserRouter([
 
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router}></RouterProvider>
+    <HashRouter router={router}></HashRouter>
 )
