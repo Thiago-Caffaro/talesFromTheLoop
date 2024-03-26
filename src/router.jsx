@@ -8,8 +8,8 @@ function AppRouter() {
   return (
     <Router>
         <Routes>
-            <Route path="/" exact element={Book}/>
-            <Route path="/teste" element={Teste}/>
+            <Route path="/" exact element={<Book />}/>
+            <Route path="/teste" element={<Teste />}/>
         </Routes>
     </Router>
   )
