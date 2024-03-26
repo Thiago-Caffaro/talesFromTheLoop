@@ -24,7 +24,7 @@ function Newpage() {
     }
     return (
         <div>
-    <form onSubmit={handleSubmit} ref={formsRef} id="formulario" action="" method="post">
+    <form onSubmit={handleSubmit} id="formulario" action="" method="post">
         <h1>Book:</h1>
         <label htmlFor="pag2">Página</label>
         <br />
