@@ -1,6 +1,6 @@
 import './App.css'
 import Book from './components/book/book'
-import Teste from './components/teste';
+import Newpage from './components/newpage';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 function AppRouter() {
@@ -9,7 +9,7 @@ function AppRouter() {
     <Router>
         <Routes>
             <Route path="/" exact element={<Book />}/>
-            <Route path="/teste" element={<Teste />}/>
+            <Route path="/newpage" element={<Newpage />}/>
         </Routes>
     </Router>
   )
