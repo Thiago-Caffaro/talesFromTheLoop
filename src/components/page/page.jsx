@@ -7,7 +7,7 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
     const [pageIndexMap, setPageIndexMap] = useState({});
     const [nextAvailableIndex, setNextAvailableIndex] = useState(1);
     const [initialIndexMap, setInitialIndexMap] = useState({});
-    
+
     const pagesContentList = usePagesContentList();
 
     useEffect(() => {
@@ -51,8 +51,7 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
     }
     return (
         <>
-            {
-                Object.keys(pagesContentList).map(pageKey => {
+            {Object.keys(pagesContentList).length > 0 && Object.keys(pagesContentList).map(pageKey => {
                     const pageRef = useRef(null);
                     const pageIndex = pageIndexMap[pageKey] || pagesContentList[pageKey].index;
                     const isFlipped = !!pageStates[pageKey];
