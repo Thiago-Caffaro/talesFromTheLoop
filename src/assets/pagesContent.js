@@ -1,6 +1,9 @@
-fetch('https://api.caffaro.cloud').then((response) =>{
-    console.log(response)
-})
+fetch('https://api.caffaro.cloud')
+    .then(response => response.json()) // converte a resposta em JSON
+    .then(data => {
+        console.log(data); // imprime os dados no console
+    })
+    .catch(error => console.error('Erro:', error));
 
 const pagesContentList = {
     pag2: {
