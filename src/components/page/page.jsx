@@ -1,6 +1,6 @@
 import './page.css';
 import { usePagesContentList } from '../../assets/usePagesContentList';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, React } from 'react';
 
 function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
     const [pageStates, setPageStates] = useState({});
