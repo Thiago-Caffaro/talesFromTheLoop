@@ -1,8 +1,10 @@
 import './card.css'
-import pagesContentList from '../../assets/pagesContent';
+import {usePagesContentList} from '../../assets/usePagesContentList';
 import { useState, useRef, useEffect } from 'react';
 
 function Card({setIsVisible, isVisible, actualCardKey,}){
+    const pagesContentList = usePagesContentList();
+
     // Creation of the array to track the state of zoomed cards
     const totalImages = 2; // Total number of images
     const imagesArray = Array.from({ length: totalImages }, (_, index) => index + 1);

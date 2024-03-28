@@ -1,5 +1,5 @@
 import './page.css';
-import pagesContentList from '../../assets/pagesContent';
+import { usePagesContentList } from '../../assets/usePagesContentList';
 import { useEffect, useRef, useState } from 'react';
 
 function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
@@ -7,6 +7,8 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
     const [pageIndexMap, setPageIndexMap] = useState({});
     const [nextAvailableIndex, setNextAvailableIndex] = useState(1);
     const [initialIndexMap, setInitialIndexMap] = useState({});
+    
+    const pagesContentList = usePagesContentList();
 
     useEffect(() => {
         // Inicializa o mapa de índice inicial com os valores iniciais do zIndex de cada página
@@ -14,7 +16,8 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
             initialIndexMap[pageKey] = pagesContentList[pageKey].index;
         });
         setInitialIndexMap(initialIndexMap);
-    }, []);
+    }, [pagesContentList]); // essa dependência garante que isso seja executado sempre que pagesContentList for atualizado
+
 
 
     const flipPage = (pageKey) => {
