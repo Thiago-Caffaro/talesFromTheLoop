@@ -1,3 +1,7 @@
+fetch('https://api.caffaro.cloud').then((response) =>{
+    console.log(response)
+})
+
 const pagesContentList = {
     pag2: {
         frontTitle: "Ato 2 - O abeçoado e infeliz pianista",

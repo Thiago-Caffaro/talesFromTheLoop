@@ -1,7 +1,11 @@
 form{
+    min-width: 500px;
     margin: 20px;
     padding: 15px;
-    background-color: aliceblue;
+
+    border-radius: 15px;
+    color: aliceblue;
+    background-color: rgb(98, 98, 98);
 }
 input{
     display: block;
@@ -10,4 +14,7 @@ textarea{
     max-width: 400px;
     min-width: 200px;
     max-height: 1000px;
+}
+textarea,input{
+    font-size: 20px;
 }

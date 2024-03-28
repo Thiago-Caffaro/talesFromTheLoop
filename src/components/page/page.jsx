@@ -10,7 +10,6 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
 
     useEffect(() => {
         // Inicializa o mapa de índice inicial com os valores iniciais do zIndex de cada página
-        const initialIndexMap = {};
         Object.keys(pagesContentList).forEach(pageKey => {
             initialIndexMap[pageKey] = pagesContentList[pageKey].index;
         });

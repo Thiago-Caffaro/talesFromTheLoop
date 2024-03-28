@@ -5,7 +5,19 @@ function Newpage() {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData);
+        let data = {
+            pag: formData.get('pag'),
+            frontTitle: formData.get('pag[frontTitle]'),
+            frontText: formData.get('pag[frontText]'),
+            backTitle: formData.get('pag[backTitle]'),
+            backText: formData.get('pag[backText]'),
+            index: formData.get('pag[index]'),
+            card: {
+                act: formData.get('pag[card][act]'),
+                mainText: formData.get('pag[card][mainText]')
+            }
+        };
+    
         const pagesContentJson = JSON.stringify(data)
         fetch('https://api.caffaro.cloud/add', {
             method: 'POST',
@@ -25,32 +37,35 @@ function Newpage() {
     return (
         <div>
     <form onSubmit={handleSubmit} id="formulario" action="" method="post">
-        <h1>Book:</h1>
-        <label htmlFor="pag2">Página</label>
+        <h1>Livro:</h1>
+        <label htmlFor="pag">Página</label>
         <br />
-        <textarea id="pag2" name="pag2" type="text">pag2</textarea>
+        <input id="pag" name="pag" type="number"></input>
         <br />
-        <label htmlFor="pag2[frontTitle]">FrontTitle</label>
-        <input id="pag2[frontTitle]" name="pag2[frontTitle]" type="text"  />
+        <label htmlFor="pag[frontTitle]">FrontTitle</label>
+        <input id="pag[frontTitle]" name="pag[frontTitle]" type="text"  />
         <br />
-        <label htmlFor="pag2[frontText]">FrontText</label>
-        <input id="pag2[frontText]" name="pag2[frontText]" type="text"  />
+        <label htmlFor="pag[frontText]">FrontText</label>
         <br />
-        <label htmlFor="pag2[backTitle]">BackTitle</label>
-        <input id="pag2[backTitle]" name="pag2[backTitle]" type="text"/>
+        <textarea id="pag[frontText]" name="pag[frontText]" type="text"  />
         <br />
-        <label htmlFor="pag2[backText]">BackText</label>
-        <input id="pag2[backText]" name="pag2[backText]" type="text" />
+        <label htmlFor="pag[backTitle]">BackTitle</label>
+        <input id="pag[backTitle]" name="pag[backTitle]" type="text"/>
         <br />
-        <label htmlFor="pag2[index]">Index</label>
-        <input id="pag2[index]" name="pag2[index]" type="text" />
+        <label htmlFor="pag[backText]">BackText</label>
+        <br />
+        <textarea id="pag[backText]" name="pag[backText]" type="text" />
+        <br />
+        <label htmlFor="pag[index]">Index</label>
+        <input id="pag[index]" name="pag[index]" type="number" />
         <br />
         <h1>Cards:</h1>
-        <label htmlFor="pag2[card][act]">act</label>
-        <input id="pag2[card][act]" name="pag2[card][act]" type="text" />
+        <label htmlFor="pag[card][act]">act</label>
+        <input id="pag[card][act]" name="pag[card][act]" type="number" />
         <br />
-        <label htmlFor="pag2[card][mainText]">MainText</label>
-        <input id="pag2[card][mainText]" name="pag2[card][mainText]" type="text"/>
+        <label htmlFor="pag[card][mainText]">MainText</label>
+        <br />
+        <textarea id="pag[card][mainText]" name="pag[card][mainText]" type="text"/>
         <br />
 
         <input type="submit" value="Mandar" />
