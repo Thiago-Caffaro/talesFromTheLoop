@@ -1,4 +1,4 @@
-const pagesContentList = {}
+let pagesContentList = {}
 fetch('https://api.caffaro.cloud')
     .then(response => response.json()) // converte a resposta em JSON
     .then(data => {
