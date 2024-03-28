@@ -8,6 +8,8 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
     const [nextAvailableIndex, setNextAvailableIndex] = useState(1);
     const [initialIndexMap, setInitialIndexMap] = useState({});
 
+    const pageRefs = useRef({}); //Objeto para adicionar as ref de cada página
+
     const pagesContentList = usePagesContentList();
 
     useEffect(() => {
@@ -49,15 +51,20 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
         setActualCardKey(actualCardKey);
         setIsVisible(true);
     }
+
     return (
         <>
             {Object.keys(pagesContentList).length > 0 && Object.keys(pagesContentList).map(pageKey => {
-                    const pageRef = useRef(null);
+                    // Verifica se a referencia para a pagina do elemento atual existe na lista de useRefs, se não, cria um
+                    if (!pageRefs.current[pageKey]) {
+                        pageRefs.current[pageKey] = React.createRef();
+                    }
+
                     const pageIndex = pageIndexMap[pageKey] || pagesContentList[pageKey].index;
                     const isFlipped = !!pageStates[pageKey];
 
                     return (
-                        <div className={`page-container ${isFlipped ? 'flipped' : ''}`} key={pageKey} ref={pageRef} style={{ zIndex: pageIndex }}>
+                        <div className={`page-container ${isFlipped ? 'flipped' : ''}`} key={pageKey} ref={pageRefs.current[pageKey]} style={{ zIndex: pageIndex }}>
                             <div className="front-page">
                                 <div className="text-area">
                                     <h2>{pagesContentList[pageKey].frontTitle}</h2>
