@@ -36,30 +36,30 @@ function Newpage() {
                 }
             };
 
-            const pagesContentJson = JSON.stringify(data)
-            console.log(pagesContentJson)
+            for (let key in data){
+                formData.append(key, data[key]);
+            }
+            
             fetch('https://api.caffaro.cloud/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                    body: pagesContentJson,
-                })
-                .then(response => response.json())
-                .then(pagesContentList1 => {
-                    console.log('Sucesso:', pagesContentList1);
-                })
-                .catch((error) => {
-                    console.error('Erro:', error);
-                });
-        })
+                    method: 'POST',
+                    body: formData,
+            })
+            .then(response => response.json())
+            .then(pagesContentList1 => {
+                console.log('Sucesso:', pagesContentList1);
+            })
+            .catch((error) => {
+                console.error('Erro:', error);
+            });
+            })
         .catch(error => {
             console.error('Erro ao ler os arquivos:', error);
         });
     };
+
     return (
         <div>
-    <form onSubmit={handleSubmit} id="formulario" action="" method="post">
+        <form onSubmit={handleSubmit} id="formulario" action="" method="post">
         <h1>Livro:</h1>
         <label htmlFor="pag">Página</label>
         <br />
