@@ -2,20 +2,24 @@ import { useState } from "react";
 import "./estilo.css"
 
 function Newpage() {   
+    // Tudo que acontece ao enviar os dados
     const handleSubmit = (event) =>{
         event.preventDefault();
 
-        const formData = new FormData(event.target);
-        const cardsFiles = document.querySelector('#cardsFile').files;
+        const formData = new FormData(event.target); // Criando um formData para trabalhar com multipart/form-data
+        const cardsFiles = document.querySelector('#cardsFile').files; // Aqui pego os arquivos jogados no input de arquivos para os cards
+
+        // Uma promessa para esperar os arquivos serem carregados, e então criar um array com eles
+        // Ela é junta de um map que irá passar por cada arquivo "file" e transformar em uma string em base64
         let cardsImagesPromises = Array.from(cardsFiles).map(file =>{
             return new Promise((resolve, reject) =>{
                 let reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = function(){
+                reader.readAsDataURL(file); // Com o fileReader, lê o arquivo
+                reader.onloadend = function(){ // E então, quando a leitura acabar, o reader retornará o resultado (em base64)
                     let base64data = reader.result;
-                    resolve(base64data)
+                    resolve(base64data); // Retorna no array o valor em base64
                 };
-                reader.onerror = reject;
+                reader.onerror = reject; // Em caso de erro, rejeitará
             });
         });
             
@@ -35,16 +39,18 @@ function Newpage() {
                     cardImages: cardsImages
                 }
             };
+            // Aqui eu transformo os dados do formulário em json e junto ao formData
             let dataJson = JSON.stringify(data);
             formData.append('data', dataJson);
             
+            // Aqui envio os dados do formData com um fetch
             fetch('https://api.caffaro.cloud/add', {
                     method: 'POST',
                     body: formData,
             })
             .then(response => response.json())
             .then(pagesContentList1 => {
-                console.log('Sucesso:', pagesContentList1);
+                console.log('Sucesso:', pagesContentList1);//Loggando o resultado do fetch
             })
             .catch((error) => {
                 console.error('Erro:', error);
@@ -55,6 +61,7 @@ function Newpage() {
         });
     };
 
+    // Literalmente todos os formulários
     return (
         <div>
         <form onSubmit={handleSubmit} id="formulario" action="" method="post">
