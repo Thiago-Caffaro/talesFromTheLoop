@@ -35,10 +35,8 @@ function Newpage() {
                     cardImages: cardsImages
                 }
             };
-
-            for (let key in data){
-                formData.append(key, data[key]);
-            }
+            let dataJson = JSON.stringify(data);
+            formData.append('data', dataJson);
             
             fetch('https://api.caffaro.cloud/add', {
                     method: 'POST',
