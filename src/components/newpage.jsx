@@ -1,39 +1,62 @@
+import { useState } from "react";
 import "./estilo.css"
 
-function Newpage() {
+function Newpage() {   
     const handleSubmit = (event) =>{
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        let data = {
-            pag: formData.get('pag'),
-            frontTitle: formData.get('pag[frontTitle]'),
-            frontText: formData.get('pag[frontText]'),
-            backTitle: formData.get('pag[backTitle]'),
-            backText: formData.get('pag[backText]'),
-            index: formData.get('pag[index]'),
-            card: {
-                act: formData.get('pag[card][act]'),
-                mainText: formData.get('pag[card][mainText]')
-            }
-        };
-    
-        const pagesContentJson = JSON.stringify(data)
-        fetch('https://api.caffaro.cloud/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-                body: pagesContentJson,
-            })
-            .then(response => response.json())
-            .then(pagesContentList1 => {
-                console.log('Sucesso:', pagesContentList1);
-            })
-            .catch((error) => {
-                console.error('Erro:', error);
+        const cardsFiles = document.querySelector('#cardsFile').files;
+        let cardsImagesPromises = Array.from(cardsFiles).map(file =>{
+            return new Promise((resolve, reject) =>{
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function(){
+                    let base64data = reader.result;
+                    resolve(base64data)
+                };
+                reader.onerror = reject;
             });
-    }
+        });
+            
+        
+        Promise.all(cardsImagesPromises)
+        .then(cardsImages => {
+            let data = {
+                pag: formData.get('pag'),
+                frontTitle: formData.get('pag[frontTitle]'),
+                frontText: formData.get('pag[frontText]'),
+                backTitle: formData.get('pag[backTitle]'),
+                backText: formData.get('pag[backText]'),
+                index: formData.get('pag[index]'),
+                card: {
+                    act: formData.get('pag[card][act]'),
+                    mainText: formData.get('pag[card][mainText]'),
+                    cardImages: cardsImages
+                }
+            };
+
+            const pagesContentJson = JSON.stringify(data)
+            console.log(pagesContentJson)
+            fetch('https://api.caffaro.cloud/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                    body: pagesContentJson,
+                })
+                .then(response => response.json())
+                .then(pagesContentList1 => {
+                    console.log('Sucesso:', pagesContentList1);
+                })
+                .catch((error) => {
+                    console.error('Erro:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Erro ao ler os arquivos:', error);
+        });
+    };
     return (
         <div>
     <form onSubmit={handleSubmit} id="formulario" action="" method="post">
@@ -67,7 +90,11 @@ function Newpage() {
         <br />
         <textarea id="pag[card][mainText]" name="pag[card][mainText]" type="text"/>
         <br />
+        <input type="file" id="cardsFile" multiple />
+        <div id="filesBox">            
 
+        </div>
+        <br />
         <input type="submit" value="Mandar" />
     </form>
 </div>

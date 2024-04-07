@@ -16,6 +16,9 @@ function Card({setIsVisible, isVisible, actualCardKey,}){
         chave1: 'valor1',
         chave2: 'valor2'
     })
+    const zoom = {
+        
+    }
     useEffect(() => {
         setIsZ(prevState => ({
             ...prevState,
