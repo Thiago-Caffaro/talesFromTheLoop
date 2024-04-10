@@ -11,16 +11,15 @@ function Page({ setIsVisible, setActualCardKey, isClosing, isVisible}) {
     const pageRefs = useRef({}); //Objeto para adicionar as ref de cada página
 
     const pagesContentList = usePagesContentList();
-
+    
     useEffect(() => {
-        // Inicializa o mapa de índice inicial com os valores iniciais do zIndex de cada página
         Object.keys(pagesContentList).forEach(pageKey => {
-            initialIndexMap[pageKey] = pagesContentList[pageKey].index;
+            const thisPageIndex = Object.keys(pagesContentList).length;
+            initialIndexMap[pageKey] = thisPageIndex;
         });
         setInitialIndexMap(initialIndexMap);
     }, [pagesContentList]); // essa dependência garante que isso seja executado sempre que pagesContentList for atualizado
-
-
+    
 
     const flipPage = (pageKey) => {
         setPageStates(prevState => ({
